@@ -3,6 +3,9 @@ const app = express()
 //const cors = cors()
 const path = require('path')
 const serverRouter = require('./routes')
+//let {Schema, model} = require('mongoose')
+const db_connection = require('./config/db')
+//let {productCreateSchema} = require('./components/users/schema/productosSchema')
 
 const PORT = 8080
 
@@ -16,8 +19,13 @@ app.set('views', './views')
 app.get('/', (req,res)=>{
     res.redirect('/api/index')
 })
+
 serverRouter(app)
 
+//const productSchema = new Schema(productCreateSchema)
+//const productModel = model('productos', productSchema)
+
+db_connection()
 
 app.get('/:params', (req, res) => {
     let notFound = {

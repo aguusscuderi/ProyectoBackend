@@ -1,3 +1,4 @@
+console.log('script')
 const cards = document.getElementById('cards')
 const items = document.getElementById('items')
 const footer = document.getElementById('footer')
@@ -9,7 +10,27 @@ const fragment = document.createDocumentFragment()
 let carrito = {}
 let boughts = []
 
-document.addEventListener('DOMContentLoaded', () => { fetchData() });
+document.addEventListener('DOMContentLoaded', () => {fetchData()});
+
+const fetchCards = async () => {
+    try{
+        const res = await fetch('http://localhost:8080/api/productos')
+        const products = await res.json()
+        return products
+    }catch(e){
+        console.log(e, 'fetch card error')
+    }
+}
+
+const fetchData = async () => {
+    try{
+        const productsToCard = await fetchCards()
+        pintarCards(productsToCard)
+    } catch(err) {
+        console.log(err, 'errorrrr')
+    }
+}
+
 
 cards.addEventListener('click', e => {
     addCarrito(e)
@@ -19,18 +40,7 @@ items.addEventListener('click', e => {
     btnAccion(e)
 })
 
-const fetchData = async () => {
-    try{
-        const res = await fetch('../templates/productos.json');
-        const data = await res.json()
-        pintarCards(data);
-    } catch(err) {
-        console.log(err, 'errorrrr')
-    }
-}
-
-
-const pintarCards = data => {
+const pintarCards = (data) => {
     data.forEach(producto => {
         templateCard.getElementById('card-name').textContent = producto.title
         templateCard.getElementById('card-description').textContent = producto.description
@@ -180,3 +190,4 @@ const fetchBuy = () => {
         console.log(e, 'fetch cart error')
     }
 }
+

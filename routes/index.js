@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const router = Router()
 const fs = require('fs')
-const productClass = require('../public/scripts/products')
-const productsFromFile = new productClass('./public/templates/productos.json')
+const productClass = require('../public/js/products')
+const productsFromFile = new productClass()
 
 function serverRouter(app){
     app.use('/api', router)
@@ -17,7 +17,9 @@ function serverRouter(app){
 
     router.get('/productos', async (req, res)=>{
         const dataAll = await productsFromFile.getAll()
-        res.send(dataAll)
+        console.log(dataAll,'entregando la data')
+        res.json(dataAll)
+
     })
 
     router.post('/carrito', async (req, res) => {
@@ -62,7 +64,7 @@ function serverRouter(app){
     })
 
     router.delete('/productos/:id', async (req, res)=>{
-        let { id } = req.params
+        let { id } = req.params.id
         await productsFromFile.deleteById(id)
         res.send(`Eliminado con exito!`)
     })

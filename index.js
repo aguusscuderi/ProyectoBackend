@@ -5,6 +5,7 @@ const path = require('path')
 const serverRouter = require('./routes')
 //let {Schema, model} = require('mongoose')
 const db_connection = require('./config/db')
+const db_atlas_connection = require('./config/db_atlas')
 //let {productCreateSchema} = require('./components/users/schema/productosSchema')
 
 const PORT = 8080
@@ -29,7 +30,8 @@ serverRouter(app)
 //const productSchema = new Schema(productCreateSchema)
 //const productModel = model('productos', productSchema)
 
-db_connection()
+//db_connection()
+db_atlas_connection()
 
 app.get('/:params', (req, res) => {
     let notFound = {

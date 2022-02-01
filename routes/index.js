@@ -7,8 +7,8 @@ const productsFromFile = new productClass()
 function serverRouter(app){
     app.use('/api', router)
 
-    router.get('/index', async (req, res) => {
-         res.render('index')
+    router.get('/index', (req, res)=>{
+        res.render('index')
     })
 
     router.get('/form', async (req, res) => {

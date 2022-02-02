@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {fetchData()});
 
 const fetchCards = async () => {
     try{
-        const res = await fetch('http://localhost:8080/api/productos')
+        const res = await fetch('http://localhost:5000/api/productos')
         const products = await res.json()
         return products
     }catch(e){
@@ -163,7 +163,7 @@ const btnAccion = e => {
 
 const fetchCart = () => {
       try{
-         fetch('http://localhost:8080/api/carrito', {
+         fetch('http://localhost:5000/api/carrito', {
             method: 'POST', 
             body: JSON.stringify(carrito), 
             headers:{'Content-Type': 'application/json'}
@@ -179,7 +179,7 @@ const fetchCart = () => {
 
 const fetchBuy = () => {
     try{
-        fetch("http://localhost:8080/api/boughtSuccess", {
+        fetch("http://localhost:5000/api/boughtSuccess", {
             method: 'POST', 
             body: JSON.stringify(boughts), 
             headers:{ 'Content-Type': 'application/json' }

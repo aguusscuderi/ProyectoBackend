@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const router = Router()
-//const fs = require('fs')
-//const productClass = require('../public/js/products')
-//const productsFromFile = new productClass()
+const fs = require('fs')
+const productClass = require('../public/js/products')
+const productsFromFile = new productClass()
 
 function serverRouter(app){
     app.use('/api', router)

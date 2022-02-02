@@ -11,7 +11,7 @@ function serverRouter(app){
         res.render('index')
     })
 
-    /*router.get('/form', async (req, res) => {
+    router.get('/form', async (req, res) => {
         res.render('addProduct')
     })
 
@@ -75,7 +75,7 @@ function serverRouter(app){
             desc: `Error: /${req.params.params}. La URL ${req.method} no esta autorizada.`
         }
         res.send(notFound)
-    })*/
+    })
 }
 
 module.exports = serverRouter

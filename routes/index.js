@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const router = Router()
-const fs = require('fs')
-const productClass = require('../public/js/products')
-const productsFromFile = new productClass()
+//const fs = require('fs')
+//const productClass = require('../public/js/products')
+//const productsFromFile = new productClass()
 
 function serverRouter(app){
     app.use('/api', router)
@@ -11,7 +11,7 @@ function serverRouter(app){
         res.render('index')
     })
 
-    router.get('/form', async (req, res) => {
+    /*router.get('/form', async (req, res) => {
         res.render('addProduct')
     })
 
@@ -75,7 +75,7 @@ function serverRouter(app){
             desc: `Error: /${req.params.params}. La URL ${req.method} no esta autorizada.`
         }
         res.send(notFound)
-    })
+    })*/
 }
 
 module.exports = serverRouter

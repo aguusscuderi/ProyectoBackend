@@ -4,13 +4,11 @@ let {productCreateSchema} = require('../../components/users/schema/productosSche
 const productSchema = new Schema(productCreateSchema)
 const productModel = model('productos', productSchema)
 
-const products_db = []
-
 class Contenedor {
 
     async save(product){
         try {
-            await products_db.push(productModel.create(product))
+            await productModel.create(product)
         } catch (error) {
             console.log(error)
         }

@@ -1,7 +1,7 @@
 require('dotenv').config()
 const MONGOATLAS_DB = process.env.MONGOATLAS_DB_URI
 const ATLASDB_NAME = process.env.DBATLAS_NAME
-const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true }
+//const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true }
 const mongoose = require('mongoose')
 
 const db_atlas_connection = async () => {

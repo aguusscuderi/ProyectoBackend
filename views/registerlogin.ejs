@@ -1,0 +1,53 @@
+<%- include ('header') %> 
+<div>
+    <form action="/api/signup" method="POST" enctype="multipart/form-data">
+        <h1>REGISTRATE!</h1>
+        <div class="form-group row">
+            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPswd" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" name="pswd" class="form-control" id="inputPswd" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" name="name" class="form-control" id="inputName" placeholder="Name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputAge" class="col-sm-2 col-form-label">Age</label>
+            <div class="col-sm-10">
+              <input type="number" name="age" class="form-control" id="inputAge" placeholder="Age">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-10">
+              <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
+              <input type="number" name="phone" class="form-control" id="inputPhone" placeholder="Phone">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
+              <b> Upload you'r profile pic. </b>
+              <input type="file" name="userpic" class="form-control" id="inputFile" placeholder="Phone">
+            </div>
+          </div>
+        <button class="createCard" type="submit">Enviar</button>
+      </form>
+      <div>
+        <h2> Ya tenes una cuenta? Hace tu <a href="/api/login-form">LOGIN</a></h2>
+      </div>
+</div>

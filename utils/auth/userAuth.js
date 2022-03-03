@@ -1,10 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
-/*let {Schema, model} = require('mongoose')
-const { userCreateSchema } = require('../../components/users/schema/userSchema')
-const userSchema = new Schema(userCreateSchema)
-const userClass = model('users', userSchema)*/
 const userClass = require('../../components/users/schema/userSchema')
 
 

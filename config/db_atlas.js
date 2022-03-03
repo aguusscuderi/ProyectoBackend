@@ -5,9 +5,9 @@ const ATLASDB_NAME = process.env.DBATLAS_NAME
 const mongoose = require('mongoose')
 
 const db_atlas_connection = async () => {
-    try {
+    try{
         await mongoose.connect(`${MONGOATLAS_DB}${ATLASDB_NAME}`)
-    } catch(e){
+    }catch(e){
         console.log(e)
     }
 }

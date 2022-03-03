@@ -57,7 +57,7 @@ function serverRouter(app){
     router.get('/productos/:id', async (req, res)=>{
         let { id } = req.params
         const dataAll = await productsFromFile.getAll()
-        const filteredUserById = dataAll.filter(el => el.id == id) 
+        const filteredUserById = dataAll.filter(el => el.id_manual == id) 
         filteredUserById.length == 0 ? res.send({'error': 'Producto no encontrado'}) : res.send(filteredUserById)
     })
 

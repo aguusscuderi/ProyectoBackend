@@ -8,6 +8,9 @@ const name = Joi.string()
 const age = Joi.string()
 const address = Joi.string().required()
 const phone = Joi.number().min(5).required()
+const rol = Joi.string().required()
+
+
 
 const userCreateSchema = {
     email,
@@ -15,7 +18,8 @@ const userCreateSchema = {
     name,
     age,
     address,
-    phone
+    phone,
+    rol
 }
 
 const userSchema = new Schema(userCreateSchema)

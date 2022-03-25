@@ -41,15 +41,18 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.get('/', (req,res)=>{
-    res.render('index')
+    //console.log(req.user, '/')
+    if(req.user) res.render('index', {user_data: req.user[0]})
+    else res.render('index')
 })
 
 
 serverRouter(app)
-
 //db_connection()
 db_atlas_connection()
 passport_logic()
+
+
 
 app.get('/:params', (req, res) => {
     let notFound = {

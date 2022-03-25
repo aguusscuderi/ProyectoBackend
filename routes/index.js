@@ -4,16 +4,16 @@ const { Router } = require('express')
 const router = Router()
 const passport = require('passport')
 const fs = require('fs')
-const productClass = require('../public/js/products')
+const productClass = require('../components/products/crud/products')
 const productsFromFile = new productClass()
-/*const userClass = require('../public/js/userCRUD')
-const userCRUD = new userClass()*/
 const { isAuth } = require('../utils/auth/middlewares/isAuth')
 const userClass = require('../components/users/schema/userSchema')
 
+const boughtClass = require('../components/cart/crud/index')
+const boughtCRUD = new boughtClass()
+
 const multer = require('multer')
 const mimeTypes = require('mime-types')
-const { nextTick } = require('process')
 
 const storage = multer.diskStorage({
     destination: 'public/uploads',
@@ -46,7 +46,6 @@ function serverRouter(app){
 
     router.get('/productos', async (req, res)=>{
         const dataAll = await productsFromFile.getAll()
-        console.log(dataAll,'entregando la data')
         res.json(dataAll)
     })
 
@@ -57,7 +56,7 @@ function serverRouter(app){
     router.get('/productos/:id', async (req, res)=>{
         let { id } = req.params
         const dataAll = await productsFromFile.getAll()
-        const filteredUserById = dataAll.filter(el => el.id_manual == id) 
+        const filteredUserById = dataAll.filter(el => el._id == id) 
         filteredUserById.length == 0 ? res.send({'error': 'Producto no encontrado'}) : res.send(filteredUserById)
     })
 
@@ -65,8 +64,19 @@ function serverRouter(app){
         res.render('registerlogin')
     })
 
+    
     router.get('/success', isAuth, (req, res)=>{
-        //res.send('succeded')
+
+    })
+    
+    router.get('/logout', (req, res) => {
+        req.session.destroy(err => {
+            if(!err) {
+                setTimeout(()=>{
+                    res.redirect('/')
+                }, 2000)
+            }else res.send({status: 'Logout error', body: err})
+        })
     })
 
     router.get('/login-form', (req, res)=>{
@@ -88,6 +98,10 @@ function serverRouter(app){
         })
     })
 
+    router.get('/admin', (req, res)=>{
+        res.render('adminLogin')
+    })
+
     router.get('/:params', (req, res) => {
         let notFound = {
             error: -1,
@@ -96,21 +110,26 @@ function serverRouter(app){
         res.send(notFound)
     })
 
-    router.post('/carrito', async (req, res) => {
-        const data = JSON.stringify(req.body)
-        await fs.promises.writeFile('./public/templates/carrito.json', data)
-        res.redirect('./index')
-    })
-
-    router.post('/boughtSuccess', async (req, res) => {
-        const data = JSON.stringify(req.body)
-        const exists = fs.existsSync('./public/templates/bought.json')
-        if(exists){
-            await fs.promises.appendFile('./public/templates/bought.json', data)
-        }else{
-            await fs.promises.writeFile('./public/templates/bought.json', data)
+    router.post('/bought', async (req, res)=>{
+        const cartData = req.body
+        const finalPrice = cartData.pop()
+        cartData.slice()
+        const dataUser = req.user[0]
+        let boughtData = {
+            products:[
+                ...cartData
+            ],
+            user: {
+                _id: dataUser._id,
+                email: dataUser.email,
+                name: dataUser.name,
+                phone: dataUser.phone,
+                address: dataUser.address
+            },
+            finalPrice: finalPrice,
+            date: new Date().toUTCString()
         }
-        res.redirect('./index')
+        await boughtCRUD.save(boughtData)
     })
 
   

@@ -7,20 +7,26 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav align-items-center">
             <li class="nav-item active">
-              <a class="nav-link" href="/api/index"> Inicio </a>
+              <a class="nav-link" href="/"> Inicio </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/api/carrito"> Carrito </a>
+              <a class="nav-link" href="/api/productos">Productos</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/api/form"> Agrega productos </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/api/productos">Productos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/api/login-register">Login</a>
-          </li>
+            <% if (typeof user_data !== 'undefined' && user_data.rol === 'admin') { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/api/form"> Agrega productos </a>
+              </li>
+            <% } %>
+            <% if (typeof user_data !== 'undefined') { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/api/logout">Logout</a>
+              </li>
+              <b>Welcome <%= user_data.name %></b>
+            <% } else{ %>  
+              <li class="nav-item">
+                <a class="nav-link" href="/api/login-register">Login</a>
+              </li>
+           <% } %>
           </ul>
         </div>
       </nav>

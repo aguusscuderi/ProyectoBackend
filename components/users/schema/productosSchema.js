@@ -8,7 +8,6 @@ const thumbnail = Joi.string()
 const stock = Joi.number().min(1).required()
 
 const productCreateSchema = {
-    id_manual,
     title,
     price,
     description,

@@ -2,8 +2,6 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const userClass = require('../../components/users/schema/userSchema')
-
-
 module.exports = function passport_logic () {
     function createHash(pswd){
         return bcrypt.hash(pswd, 10, null)
@@ -21,6 +19,7 @@ module.exports = function passport_logic () {
             }
             let user = req.body
             user.pswd = await createHash(pswd)
+            user.rol = 'user'
             userClass.create(user)
         }catch(error){
             console.log(error)

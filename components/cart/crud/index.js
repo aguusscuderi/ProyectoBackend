@@ -1,20 +1,21 @@
-
-let {Schema, model} = require('mongoose')
-const { userCreateSchema } = require('../../components/users/schema/userSchema')
+/*let {Schema, model} = require('mongoose')
+const { userCreateSchema } = require('../schema/userSchema')
 const userSchema = new Schema(userCreateSchema)
-const userModel = model('users', userSchema)
+const userModel = model('users', userSchema)*/
 
-class User {
+const CartModel = require('../schema/cartSchema')
 
-    async save(user){
+class Bought {
+
+    async save(bought){
         try {
-            await userModel.create(user)
+            await CartModel.create(bought)
         } catch (error) {
             console.log(error)
         }
     }
 
-    async getAll(){
+    /*async getAll(){
         try {
            const users = await userModel.find()
            return users
@@ -38,6 +39,6 @@ class User {
             ...userUpdated
         })
         return updatedOne
-    }
+    }*/
 }
-module.exports = User
+module.exports = Bought

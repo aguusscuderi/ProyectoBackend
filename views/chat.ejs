@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Styles-->
+  <link rel="stylesheet" href="/styles/chat.css">
+  <title>Backend Ecommerce</title>
+    <body>
+        <div style="padding: 25px" class="container">
+            <div style="display: flex; justify-content: center;" id="app_chat">
+                <form style="background-color: white; border-radius: 5px;" id="form_data_user">
+                    <div style="text-align: center; padding: 10px;">
+                        <% if (typeof user_data !== 'undefined') { %>
+                            <h2 id="userEmail"><%=user_data.email %></h2>
+                            <h1 id="userName">¡Bienvenido al chat <%=user_data.name %>!</h1>
+                            <b style="display: none;" id="userID"><%=user_data._id %></b>
+                            <% } %>
+                    </div>
+                    <div style="text-align: center;" class="michat">
+                            <div  style="background-color: #f38282;
+                                        padding: 20px 30px;
+                                        max-width: 500px;
+                                        border-radius: 5px;" >
+                                <p id="contenedor"></p>
+                            </div>
+                            <div style="margin: 15px">
+                                <input id="inputtext" type="text" placeholder="Escribe aquí tu texto">
+                            </div>
+                            <input style="margin: 10px;" type="submit" name="" id="sendMessageButton"> 
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </body>
+    <script src='/socket.io/socket.io.min.js'></script>
+    <script type="text/javascript" src="/js/chat/utils.js"></script>
+    <script type="text/javascript" src="/js/chat/sockets.js"></script>
+    <script type="text/javascript" src='/js/chat/main.js'></script>
+</html>

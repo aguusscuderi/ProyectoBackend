@@ -1,30 +1,26 @@
 <header>
-    <nav class="navbar d-flex justify-content-center navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#"> </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <ul class="navbar-nav align-items-center">
+    <nav class="nav_bar">
+        <div class="flex_nav_div">
+          <ul class="flex_ul_div">
             <li class="nav-item active">
-              <a class="nav-link" href="/"> Inicio </a>
+              <a href="/"> Inicio </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/api/productos">Productos</a>
+              <a href="/api/productos">Productos</a>
             </li>
             <% if (typeof user_data !== 'undefined' && user_data.rol === 'admin') { %>
               <li class="nav-item">
-                <a class="nav-link" href="/api/form"> Agrega productos </a>
+                <a href="/api/form"> Agrega productos </a>
               </li>
             <% } %>
             <% if (typeof user_data !== 'undefined') { %>
               <li class="nav-item">
-                <a class="nav-link" href="/api/logout">Logout</a>
+                <a href="/api/logout">Logout</a>
               </li>
               <b>Welcome <%= user_data.name %></b>
             <% } else{ %>  
               <li class="nav-item">
-                <a class="nav-link" href="/api/login-register">Login</a>
+                <a href="/api/login-register">Login</a>
               </li>
            <% } %>
           </ul>

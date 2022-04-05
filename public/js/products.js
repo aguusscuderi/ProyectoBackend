@@ -3,11 +3,12 @@ const productsContainer = document.querySelector('.products_container')
 const carritoSection = document.getElementById('cart_div')
 const buy_button = document.querySelector('#buy-carrito')
 const total_price = document.querySelector('#total_price')
-const cart = []
+const trash = document.querySelector('.but_clearCart')
+let cart = []
 
 document.addEventListener('DOMContentLoaded', () => {fetchDataProduct()});
 
-const pintarCardsProduct = (data) => {
+const frontendCartAndProducts = (data) => {
     data.forEach(producto => {
         let productDiv = document.createElement('div')
         productDiv.setAttribute('class', 'col-sm-12 col-md-4 col-lg-4')
@@ -30,6 +31,7 @@ const pintarCardsProduct = (data) => {
         productsContainer.appendChild(productDiv)
     })
     buyMaker()
+    emptyCart()
     const buyButton = document.querySelectorAll('#card-action-buy')
     buyButton.forEach(butt => {
         butt.addEventListener('click', (e)=>{
@@ -38,6 +40,7 @@ const pintarCardsProduct = (data) => {
                 _id: target.id,
                 title: target.querySelector('.product_title').textContent,
                 precio: target.querySelector('.product_price').textContent,
+                description: target.querySelector('.desc').textContent,
                 cantidad: 1
             }
             let verification = cart.some(x => x._id == product._id)
@@ -47,7 +50,7 @@ const pintarCardsProduct = (data) => {
                 let productOnCart = document.getElementById(`onCart${productToUpdate[0]._id}`)
                 let quantity_product = productOnCart.querySelector('.quantity_product')
                 quantity_product.innerText = `Cantidad: ${productToUpdate[0].cantidad}`
-                total_price.innerText = cart.reduce((final, item) => {return (final + (item.precio * item.cantidad ))}, 0) 
+                totalCalculator()
             }else{
                 cart.push(product)
                 pintarCarrito()
@@ -61,13 +64,23 @@ const pintarCarrito = async () => {
         if(!carritoSection.contains(document.getElementById(`onCart${el._id}`))){
             let cartDiv = document.createElement('div')
             cartDiv.setAttribute('id', `onCart${el._id}`)
-            cartDiv.innerHTML += `
-                    <b>Titulo: ${el.title}</b>
-                    <b>Precio:  ${el.precio}</b>
-                    <b class="quantity_product">Cantidad: ${el.cantidad}</b>
+            cartDiv.setAttribute('class', `buyingProduct`)
+                cartDiv.innerHTML += `
+                    <div class="productInCart-container">
+                        <div>
+                            <h1>${el.title}</h1>
+                            <span> Cantidad:${el.cantidad}</span>
+                            <p>  ${el.description} </p>
+                            <p> Precio: ${el.precio} x1 </p>
+                        </div>
+
+                        <div class="cartImage-container">
+                            <img src="http://mistillas.cl/wp-content/uploads/2018/04/Nike-Epic-React-Flyknit-%E2%80%9CPearl-Pink%E2%80%9D-01.jpg" alt="" />
+                        </div>
+                    </div>
                 `
             carritoSection.appendChild(cartDiv)
-            total_price.innerText = cart.reduce((final, item) => {return (final + (item.precio * item.cantidad ))}, 0) 
+            totalCalculator()
         }
     })
 }
@@ -77,9 +90,21 @@ const buyMaker = () => {
     buy_button.addEventListener('click', ()=>{
         let final_price = total_price.innerText
         cart.push(final_price)
-        console.log(cart)
         fetchBuyCart()
     })
+}
+
+const emptyCart = () => {
+    trash.addEventListener('click', function (){
+        cart = []
+        let cartDiv = document.querySelectorAll('.buyingProduct')
+        cartDiv.forEach(el => el.innerHTML = ``)
+        totalCalculator()
+    })
+}
+
+const totalCalculator = () => {
+    total_price.innerText = cart.reduce((final, item) => {return (final + (item.precio * item.cantidad ))}, 0) 
 }
 
 const fetchBuyCart = () => {
@@ -110,7 +135,7 @@ const fetchCardsProduct = async () => {
 const fetchDataProduct = async () => {
     try{
         let productsToCard = await fetchCardsProduct()
-        pintarCardsProduct(productsToCard)
+        frontendCartAndProducts(productsToCard)
     } catch(err) {
         console.log(err, 'errorrrr')
     }

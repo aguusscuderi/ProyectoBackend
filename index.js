@@ -11,6 +11,15 @@ const passport_logic = require('./utils/auth/userAuth')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const logger = require('./utils/log/index')
+const renderController = require('./controllers/renderController')
+
+const {Server : IOServer} = require('socket.io')
+const {Server : HttpServer} = require('http')
+const server = new HttpServer(app)
+const io = new IOServer(server)
+const chat_logic = require('./utils/chat/index')
+
 
 const PORT = process.env.PORT || 5000
 
@@ -21,6 +30,11 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(cookieParser())
+app.use((req, res, next)=>{       
+    logger.getLogger('info').info(`${req.method} - ${req.url}`)
+    next() 
+})
+
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true }
 const MONGOATLAS_DB = process.env.MONGOATLAS_DB_URI
 const ATLASDB_SESSION_NAME = process.env.DBATLAS_SESSION
@@ -34,24 +48,19 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         //maxAge: 10000 //10 segundos
-        maxAge: 600000 // 10 minutos
+        maxAge: 600000, // 10 minutos
     }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.get('/', (req,res)=>{
-    //console.log(req.user, '/')
-    if(req.user) res.render('index', {user_data: req.user[0]})
-    else res.render('index')
-})
-
+app.get('/', renderController.indexView)
 
 serverRouter(app)
 //db_connection()
 db_atlas_connection()
 passport_logic()
-
+chat_logic(io)
 
 
 app.get('/:params', (req, res) => {
@@ -62,6 +71,11 @@ app.get('/:params', (req, res) => {
     res.send(notFound)
 })
 
-app.listen(PORT, ()=> {
+server.listen(PORT, ()=> {
     console.log(`Estas conectado a http://localhost:${PORT}`)
 })
+
+/*app.listen(PORT, ()=> {
+    console.log(`Estas conectado a http://localhost:${PORT}`)
+})*/
+

@@ -1,5 +1,16 @@
-<%- include ('header') %> 
-<div class="register_div">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/register.css">
+  <title>Document</title>
+</head>
+<body>
+  <%- include ('header') %> 
+  <div class="register_div">
     <form action="/api/signup" method="POST" enctype="multipart/form-data">
         <h1>REGISTRATE!</h1>
         <div class="form-group row">
@@ -39,15 +50,16 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
             <div class="col-sm-10">
               <b> Upload you'r profile pic. </b>
               <input type="file" name="userpic" class="form-control" id="inputFile" placeholder="Phone">
             </div>
           </div>
-        <button class="createCard" type="submit">Enviar</button>
+        <button class="sendUserButton" type="submit">Enviar</button>
       </form>
       <div>
         <h2> Ya tenes una cuenta? Hace tu <a href="/api/login-form">LOGIN</a></h2>
       </div>
-</div>
+  </div>
+</body>
+</html>

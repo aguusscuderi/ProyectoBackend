@@ -17,6 +17,7 @@ const cantidad = Joi.number().required()
 
 const finalPrice = Joi.string().required()
 const date =  Joi.date().format('YYYY-MM-DD').utc()
+const order = Joi.string().required()
 
 const boughtCreateSchema = {
     products: [{ 
@@ -33,7 +34,8 @@ const boughtCreateSchema = {
         address
     },
     finalPrice,
-    date
+    date,
+    order
 }
 
 

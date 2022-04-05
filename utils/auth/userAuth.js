@@ -1,6 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
+const logger = require('../log/index')
 const userClass = require('../../components/users/schema/userSchema')
 module.exports = function passport_logic () {
     function createHash(pswd){
@@ -14,7 +15,7 @@ module.exports = function passport_logic () {
         try {
             const userExists = await userClass.findOne({email: `${email}`})
             if(userExists){
-                console.log('User already exists')
+                logger.getLogger('outwarning').warn(`El usuario ya existe!`)
                 return done(null, false)
             }
             let user = req.body
@@ -22,7 +23,7 @@ module.exports = function passport_logic () {
             user.rol = 'user'
             userClass.create(user)
         }catch(error){
-            console.log(error)
+            logger.getLogger('outerror').error('Saving error!', err) 
         }
     }))
 
@@ -35,11 +36,11 @@ module.exports = function passport_logic () {
     }, async (email, pswd, done) => {
         const user = await userClass.findOne({email: `${email}`})
         if(!user){
-            console.log('user not found', user)
+            logger.getLogger('outwarning').warn(`User not found.`)
             return done(null, false)
         }else{
             if(!isValidPswd(user,pswd)){
-                console.log('Invalid pswd')
+                logger.getLogger('outwarning').warn(`Invalid password.`)
                 return done(null, false)
             }else{
                 done(null, user)

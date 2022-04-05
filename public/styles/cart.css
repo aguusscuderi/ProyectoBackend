@@ -5,3 +5,97 @@
     padding: 5px;
     border-radius: 5px;
 }
+
+.productInCart-container {
+    display: block;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 30px;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 20px auto;
+    background-color: #f5f5f5;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 5px 5px 15px rgba(186, 126, 126, .5);
+}
+.productInCart-container .cartImage-container {
+    height: 30%;
+    width: 30%;
+}
+@media screen and (max-width: 760px) {
+    .productInCart-container .cartImage-container {
+        width: 100%;
+   }
+}
+.productInCart-container .cartImage-container img {
+    max-width: 100%;
+}
+.but_clearCart {
+    background: #f38282;
+    padding: 5px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    margin: 5px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #f5f5f5;
+    cursor: pointer;
+}
+.but_clearCart:hover {
+    background: #f16464;
+    transition: all 0.4s ease-in-out;
+}
+.buying-form-div {
+    text-align: center;
+}
+.buying-form-div form div {
+    margin: 10px;
+}
+.buying-form-div form div label {
+    display: block;
+}
+.buying-form-div form div input {
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+}
+.buying-form-div form button {
+    background: #9fe19a;
+    padding: 5px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    margin: 5px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #f5f5f5;
+    cursor: pointer;
+}
+.buying-form-div form button:hover {
+    background: #78cf71;
+    transition: all 0.4s ease-in-out;
+}
+.successful-bought-div {
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    background-color: #7350a2;
+    border-radius: 15px;
+}
+.successful-bought-div span {
+    font-size: 1.3em;
+}
+.successful-bought-div span strong {
+    display: block;
+    letter-spacing: 1px;
+    margin: 3px;
+    color: white;
+}

@@ -109,7 +109,7 @@ const totalCalculator = () => {
 
 const fetchBuyCart = () => {
     try{
-        fetch("http://localhost:5000/api/bought", {
+        fetch("/api/bought", {
             method: 'POST', 
             body: JSON.stringify(cart), 
             headers:{ 'Content-Type': 'application/json' }
@@ -124,7 +124,7 @@ const fetchBuyCart = () => {
 
 const fetchCardsProduct = async () => {
     try{
-        let res = await fetch('http://localhost:5000/api/productos')
+        let res = await fetch('/api/productos')
         let products = await res.json()
         return products
     }catch(e){

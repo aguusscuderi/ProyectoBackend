@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 function adminAddProduct (req, res) {
     if(req.user){
         let user = req.user[0]
@@ -21,8 +23,20 @@ function indexView (req, res) {
     else res.render('index')
 }
 
+async function getAvatars (req, res) {
+    await fs.readdir('./public/uploads', function(err, files_path){
+        if(err){
+            onerror(err)
+            return
+        }
+        const file = files_path
+        res.render('avatares', {pictures: file})
+    }) 
+}
+
 module.exports = {
     adminAddProduct,
     chatView,
-    indexView
+    indexView,
+    getAvatars
 }

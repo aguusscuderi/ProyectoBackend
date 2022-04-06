@@ -17,13 +17,16 @@ module.exports = function passport_logic () {
             if(userExists){
                 logger.getLogger('outwarning').warn(`El usuario ya existe!`)
                 return done(null, false)
+            }else{
+                let user = req.body
+                user.pswd = await createHash(pswd)
+                user.rol = 'user'
+                await userClass.create(user)
+                let userData = await userClass.findOne({email: email})
+                return done(null, userData) 
             }
-            let user = req.body
-            user.pswd = await createHash(pswd)
-            user.rol = 'user'
-            userClass.create(user)
         }catch(error){
-            logger.getLogger('outerror').error('Saving error!', err) 
+            logger.getLogger('outerror').error('Saving error!', error) 
         }
     }))
 
@@ -53,7 +56,7 @@ module.exports = function passport_logic () {
     })
 
     passport.deserializeUser((id, done) => {
-            userClass.find({_id: `${id}`}, (err, user) => {
+            userClass.find({_id: id}, (err, user) => {
             done(err, user)
         })
     })

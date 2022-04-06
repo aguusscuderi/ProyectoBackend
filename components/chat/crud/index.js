@@ -20,7 +20,7 @@ class Chat {
 
     /*async deleteById(id) {
         try{
-            const deletedOne = await userModel.deleteOne({_id: id})
+            const deletedOne = await ChatModel.deleteOne({_id: id})
             return deletedOne
         }catch(e){
             console.log('error', e)
@@ -29,7 +29,7 @@ class Chat {
     }
 
     async updateById(userUpdated, id){
-        const updatedOne = await userModel.updateOne({_id: id}, {
+        const updatedOne = await ChatModel.updateOne({_id: id}, {
             ...userUpdated
         })
         return updatedOne

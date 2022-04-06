@@ -4,7 +4,6 @@ const app = express()
 //const cors = cors()
 const path = require('path')
 const serverRouter = require('./routes')
-//const db_connection = require('./config/db')
 const db_atlas_connection = require('./config/db_atlas')
 const passport = require('passport')
 const passport_logic = require('./utils/auth/userAuth')
@@ -19,7 +18,6 @@ const {Server : HttpServer} = require('http')
 const server = new HttpServer(app)
 const io = new IOServer(server)
 const chat_logic = require('./utils/chat/index')
-
 
 const PORT = process.env.PORT || 5000
 
@@ -47,8 +45,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        //maxAge: 10000 //10 segundos
-        maxAge: 600000, // 10 minutos
+        maxAge: 600000
     }
 }))
 app.use(passport.initialize())
@@ -57,7 +54,6 @@ app.use(passport.session())
 app.get('/', renderController.indexView)
 
 serverRouter(app)
-//db_connection()
 db_atlas_connection()
 passport_logic()
 chat_logic(io)
@@ -74,8 +70,3 @@ app.get('/:params', (req, res) => {
 server.listen(PORT, ()=> {
     console.log(`Estas conectado a http://localhost:${PORT}`)
 })
-
-/*app.listen(PORT, ()=> {
-    console.log(`Estas conectado a http://localhost:${PORT}`)
-})*/
-

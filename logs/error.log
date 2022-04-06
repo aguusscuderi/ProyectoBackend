@@ -1,0 +1,2 @@
+[2022-04-05T14:11:45.008] [ERROR] outerror - Saving error! ReferenceError: db is not defined
+    at Strategy._verify (C:\Users\aguus\Desktop\CODERHOUSE\BACKEND\proyectofinal\utils\auth\userAuth.js:25:28)

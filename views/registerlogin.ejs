@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/styles/register.css">
   <title>Document</title>
 </head>
-<body>
+<body style="margin: 0px;">
   <%- include ('header') %> 
   <div class="register_div">
     <form action="/api/signup" method="POST" enctype="multipart/form-data">
@@ -55,9 +55,9 @@
               <input type="file" name="userpic" class="form-control" id="inputFile" placeholder="Phone">
             </div>
           </div>
-        <button class="sendUserButton" type="submit">Enviar</button>
+        <button class="sendUserButton" style="cursor: pointer;" type="submit">Enviar</button>
       </form>
-      <div>
+      <div style="padding: 15px;">
         <h2> Ya tenes una cuenta? Hace tu <a href="/api/login-form">LOGIN</a></h2>
       </div>
   </div>

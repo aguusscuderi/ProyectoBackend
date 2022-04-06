@@ -1,6 +1,6 @@
 
 let {Schema, model} = require('mongoose')
-let {productCreateSchema} = require('../../users/schema/productosSchema')
+let {productCreateSchema} = require('../schema/productosSchema')
 const productSchema = new Schema(productCreateSchema)
 const productModel = model('productos', productSchema)
 

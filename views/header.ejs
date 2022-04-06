@@ -5,9 +5,6 @@
             <li class="nav-item active">
               <a href="/"> Inicio </a>
             </li>
-            <li class="nav-item">
-              <a href="/api/productos">Productos</a>
-            </li>
             <% if (typeof user_data !== 'undefined' && user_data.rol === 'admin') { %>
               <li class="nav-item">
                 <a href="/api/form"> Agrega productos </a>

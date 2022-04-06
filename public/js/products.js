@@ -1,4 +1,3 @@
-
 const productsContainer = document.querySelector('.products_container')
 const carritoSection = document.getElementById('cart_div')
 const buy_button = document.querySelector('#buy-carrito')
@@ -54,6 +53,7 @@ const frontendCartAndProducts = (data) => {
             }else{
                 cart.push(product)
                 pintarCarrito()
+                buyMaker()
             }
         })
     })
@@ -84,19 +84,26 @@ const pintarCarrito = async () => {
         }
     })
 }
- 
+
+async function buy_buttonEventFunction () {
+    let final_price = total_price.innerText
+    cart.push(final_price)
+    alert('COMPRA REALIZADA CON EXITO')
+    await fetchBuyCart()
+} 
 
 const buyMaker = () => {
-    buy_button.addEventListener('click', ()=>{
-        let final_price = total_price.innerText
-        cart.push(final_price)
-        fetchBuyCart()
-    })
+    if(cart.length>=1){
+        buy_button.addEventListener('click', buy_buttonEventFunction)
+    }else{
+        buy_button.removeEventListener('click', buy_buttonEventFunction)
+    }
 }
 
 const emptyCart = () => {
-    trash.addEventListener('click', function (){
+    trash.addEventListener('click', () => {
         cart = []
+        buyMaker()
         let cartDiv = document.querySelectorAll('.buyingProduct')
         cartDiv.forEach(el => el.innerHTML = ``)
         totalCalculator()

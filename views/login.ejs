@@ -1,19 +1,32 @@
 <%- include ('header') %> 
-<div>
-    <form action="/api/login" method="POST">
-        <h1>LOGIN!</h1>
-        <div class="form-group row">
-            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-                <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/header.css">
+    <title>Backend Ecommerce</title>
+</head>
+<body style="margin: 0px;">
+    <div>
+        <form action="/api/login" method="POST">
+            <h1>LOGIN!</h1>
+            <div class="form-group row">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputPswd" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-                <input type="password" name="pswd" class="form-control" id="inputPswd" placeholder="Password">
+            <div class="form-group row">
+                <label for="inputPswd" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" name="pswd" class="form-control" id="inputPswd" placeholder="Password">
+                </div>
             </div>
-        </div>
-        <button class="createCard" type="submit">Enviar</button>
-      </form>
-</div>
+            <button class="createCard" type="submit">Enviar</button>
+          </form>
+    </div>
+</body>
+</html>
